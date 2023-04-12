@@ -1,12 +1,12 @@
 import tkinter as tk
 import os
-import pandas as pd 
+import pandas as pd
 from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.preprocessing import LabelEncoder
 
 frame = tk.Tk()
-frame.title("s23375's, very original and not taken from the tutorial, app for NN")
+frame.title("App for NN")
 frame.geometry('400x200')
 
 label = tk.Label(frame, text = "")
@@ -35,6 +35,10 @@ def main():
     y_test = data.iloc[600:700:,0]
     X_train = data.iloc[0:600:,1:8]
     X_test = data.iloc[600:700:,1:8]
+
+# the fix that was needed, changing type to float and/or reshaping to a NumPy array
+    X_train = X_train.to_numpy().astype('float32')
+    y_train = y_train.values.reshape((-1, 1)).astype('float32')
 
     model = Sequential()
 
